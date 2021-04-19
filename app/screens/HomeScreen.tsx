@@ -13,7 +13,7 @@ interface HomeScreenProps {
 export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const _handleSearch = () => console.log('Searching to be implemented');
 
-  const _handleMore = () => console.log('Shown more to be implemented');
+  const _handleMore = () => console.log('Show more to be implemented');
 
   return (
     <View>

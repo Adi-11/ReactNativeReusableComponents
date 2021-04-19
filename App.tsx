@@ -6,6 +6,7 @@ import {AppParamList} from './app/helpers/AppParamList';
 import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen} from './app/screens/HomeScreen';
 import {ButtonComponentScreen} from './app/screens/ButtonComponentScreen';
+import {ColorScreen} from './app/screens/ColorScreen';
 
 const Stack = createStackNavigator<AppParamList>();
 
@@ -21,6 +22,7 @@ const App = () => {
             name="ButtonComponent"
             component={ButtonComponentScreen}
           />
+          <Stack.Screen name="MasterColors" component={ColorScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
