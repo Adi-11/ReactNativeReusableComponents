@@ -16,7 +16,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const _handleMore = () => console.log('Show more to be implemented');
 
   return (
-    <View>
+    <View style={{backgroundColor: '#c7d0ed', flex: 1}}>
       <Appbar.Header style={{marginLeft: 10}}>
         <StatusBar barStyle={'dark-content'} />
         <Appbar.Content

@@ -3,7 +3,11 @@ import {Image, Text, ToastAndroid, View} from 'react-native';
 import {Portal, Dialog, Button} from 'react-native-paper';
 import Clipboard from '@react-native-clipboard/clipboard';
 import {code} from '../ButtonComponentScreen';
-import {color} from '../../helpers/col';
+import {ScrollView} from 'react-native-gesture-handler';
+import {COLORS} from '../../helpers/masterColor';
+import {ColorScreenList} from './ColorScreenList';
+import SyntaxHighlighter from 'react-native-syntax-highlighter';
+// import {docco} from 'react-syntax-highlighter/styles/hljs';
 interface PopupViewComponentProps {
   visible: boolean;
   hidePopUp: () => void;
@@ -26,65 +30,76 @@ export class PopupViewComponent extends Component<
   };
 
   render() {
+    const codeString = '(num) => num + 1';
     return (
       <Portal>
-        <Dialog visible={this.props.visible} onDismiss={this.props.hidePopUp}>
-          <Dialog.Title
+        <Dialog
+          visible={this.props.visible}
+          onDismiss={this.props.hidePopUp}
+          style={{backgroundColor: '#e6ebff', maxHeight: 400}}>
+          <Text
             style={{
-              paddingLeft: 0,
-              paddingRight: 0,
-              paddingTop: 0,
-              paddingBottom: 0,
+              textAlign: 'center',
+              marginTop: 10,
+              padding: 5,
+              fontSize: 20,
+              backgroundColor: '#b4bdd9',
+              width: '100%',
             }}>
             Code for component
-          </Dialog.Title>
-          <Dialog.Actions style={{justifyContent: 'space-evenly'}}>
-            <Button
-              icon="content-copy"
-              onPress={() => {
-                Clipboard.setString(code);
-                this.showToastWithGravityAndOffset();
-              }}
-              mode="outlined"
-              style={{margin: 20}}>
-              {}
-            </Button>
-            <Button onPress={this.props.hidePopUp} mode="outlined" icon="close">
-              {}
-            </Button>
-          </Dialog.Actions>
-          <Image
-            source={require('../../assets/code.png')}
-            resizeMode="contain"
-            style={{
-              padding: 0,
-              margin: 0,
-              height: 200,
-              width: '100%',
-            }}
-          />
-          <Dialog.Content>
-            <Text>color codes</Text>
+          </Text>
+          <ScrollView>
             <View
               style={{
-                alignItems: 'center',
                 flexDirection: 'row',
+                justifyContent: 'flex-end',
+                padding: 0,
               }}>
-              <Text style={{backgroundColor: color.PRIMARY_COLOR}}>
-                #FFC107
-              </Text>
-              <Dialog.Actions>
-                <Button
-                  icon="content-copy"
-                  onPress={() => {
-                    Clipboard.setString('#FFC107');
-                    this.showToastWithGravityAndOffset();
-                  }}>
-                  {}
-                </Button>
-              </Dialog.Actions>
+              <Button
+                icon="content-copy"
+                onPress={() => {
+                  Clipboard.setString(code);
+                  this.showToastWithGravityAndOffset();
+                }}
+                style={{margin: 'auto', padding: 0, alignItems: 'center'}}
+                mode="text">
+                {}
+              </Button>
+              <Button
+                onPress={this.props.hidePopUp}
+                mode="text"
+                icon="close"
+                style={{margin: 0, padding: 0, alignItems: 'center'}}>
+                {}
+              </Button>
             </View>
-          </Dialog.Content>
+            <Image
+              source={require('../../assets/code.png')}
+              resizeMode="stretch"
+              style={{
+                padding: 0,
+                margin: 0,
+                height: 200,
+                width: '100%',
+              }}
+            />
+            <View style={{width: '100%'}}>
+              <ColorScreenList
+                colorName={'BtnColor'}
+                showToast={this.showToastWithGravityAndOffset}
+                borderColor={COLORS[0].BtnColor as string}
+              />
+            </View>
+            <View>
+              <View
+                style={{
+                  alignItems: 'center',
+                  padding: 5,
+                }}>
+                <Text>Required Props</Text>
+              </View>
+            </View>
+          </ScrollView>
         </Dialog>
       </Portal>
     );

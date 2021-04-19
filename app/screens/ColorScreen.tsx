@@ -12,6 +12,7 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {Appbar, Button} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
 import {COLORS} from '../helpers/masterColor';
+import {ColorScreenList} from './helperScreens/ColorScreenList';
 
 interface ColorScreenProps {
   navigation: StackNavigationProp<AppParamList, 'ButtonComponent'>;
@@ -32,12 +33,7 @@ export class ColorScreen extends Component<ColorScreenProps, ColorScreenState> {
     this.setColor = React.createRef();
   }
 
-  componentDidMount() {
-    // this.setState({
-    //   colors: COLORS,
-    // });
-    // console.log(this.state.colors);
-  }
+  componentDidMount() {}
   showToastWithGravityAndOffset = () => {
     ToastAndroid.showWithGravityAndOffset(
       'Copied to clipboard',
@@ -50,7 +46,7 @@ export class ColorScreen extends Component<ColorScreenProps, ColorScreenState> {
 
   render() {
     return (
-      <>
+      <View style={{backgroundColor: '#c7d0ed'}}>
         <Appbar.Header
           style={{marginLeft: 10, marginBottom: 0, paddingBottom: 0}}>
           <Appbar.BackAction
@@ -65,73 +61,28 @@ export class ColorScreen extends Component<ColorScreenProps, ColorScreenState> {
             contentContainerStyle={{
               flexGrow: 1,
               alignItems: 'center',
+              justifyContent: 'center',
               paddingTop: 0,
               marginTop: 90,
               bottom: 90,
-              backgroundColor: '#b4c0e0',
+              backgroundColor: '#c7d0ed',
             }}
             data={COLORS}
             keyExtractor={item => item.id as string}
             renderItem={({item}) => (
-              <View
-                key={item.id as string}
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  width: '90%',
-                  margin: 10,
-                  height: 40,
-                  borderRadius: 10,
-                  paddingLeft: 20,
-                  borderColor: `${Object.values(item)[0] as string}`,
-                  borderWidth: 1,
-                  borderLeftWidth: 10,
-                }}>
-                <Text
-                  style={{
-                    flex: 1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                  }}>
-                  {Object.keys(item)[0] as string}
-                </Text>
-                <Text
-                  style={{
-                    flex: 1,
-                    alignItems: 'flex-start',
-                    justifyContent: 'flex-start',
-                    flexDirection: 'row',
-                    paddingLeft: 20,
-                  }}
-                  ref={this.setColor}>
-                  {Object.values(item)[0] as string}
-                </Text>
-                <Button
-                  style={{
-                    flex: 1,
-                    alignItems: 'center',
-                    justifyContent: 'flex-end',
-                    flexDirection: 'row',
-                    width: '100%',
-                  }}
-                  icon="content-copy"
-                  onPress={() => {
-                    Clipboard.setString(Object.values(item)[0] as string);
-                    console.log(Object.values(item)[0] as string);
-                    this.showToastWithGravityAndOffset();
-                  }}>
-                  {}
-                </Button>
-              </View>
+              <ColorScreenList
+                id={item.id as string}
+                borderColor={Object.values(item)[0] as string}
+                colorName={Object.keys(item)[0] as string}
+                showToast={this.showToastWithGravityAndOffset}
+              />
             )}
             initialNumToRender={12}
             removeClippedSubviews={true}
             maxToRenderPerBatch={8}
           />
         </View>
-      </>
+      </View>
     );
   }
 }

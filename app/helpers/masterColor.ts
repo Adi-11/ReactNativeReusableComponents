@@ -1,5 +1,6 @@
 import uuid from 'react-native-uuid';
 export const COLORS = [
+  {BtnColor: '#4f75ab', id: uuid.v4()},
   {aliceblue: '#f0f8ff', id: uuid.v4()},
   {antiquewhite: '#faebd7', id: uuid.v4()},
   {aqua: '#00ffff', id: uuid.v4()},
