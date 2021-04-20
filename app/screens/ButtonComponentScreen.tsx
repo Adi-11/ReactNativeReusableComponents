@@ -126,7 +126,7 @@ export class ButtonComponentScreen extends Component<
             width={'60%'}
             color={'#4f75ab'}
             height={40}
-            textcolor={'white'}
+            textcolor={'black'}
             borderRadius={5}
             text={'Load code snippet'}
             textSize={15}
@@ -156,26 +156,29 @@ export class ButtonComponentScreen extends Component<
               iconcolor={'white'}
             />
           </View>
-          <CustomButton
-            onpress={this.showModal}
-            width={'40%'}
-            color={'#4f75ab'}
-            height={40}
-            borderRadius={50}
-            text={' '}
-            textSize={20}
-            margin={10}
-          />
-          <CustomButton
-            onpress={this.showModal}
-            width={'40%'}
-            color={'#4f75ab'}
-            height={40}
-            borderRadius={10}
-            text={' '}
-            textSize={20}
-            margin={10}
-          />
+          <View style={{flexDirection: 'row'}}>
+            <CustomButton
+              onpress={this.showModal}
+              width={'40%'}
+              color={'#4f75ab'}
+              height={40}
+              borderRadius={50}
+              text={'code'}
+              textSize={20}
+              margin={10}
+            />
+            <CustomButton
+              onpress={this.showModal}
+              width={'40%'}
+              color={'#4f75ab'}
+              height={40}
+              textcolor={'white'}
+              borderRadius={10}
+              text={'code'}
+              textSize={20}
+              margin={10}
+            />
+          </View>
         </View>
         <PopupViewComponent
           visible={this.state.modalVisisble}

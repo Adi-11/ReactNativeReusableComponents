@@ -37,9 +37,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         <Button
           icon="gesture-tap-button"
           mode="contained"
-          style={{width: '100%', borderWidth: 2}}
+          style={{width: '100%', borderWidth: 2, marginBottom: 20}}
           onPress={() => navigation.navigate('ButtonComponent')}>
           Button components
+        </Button>
+        <Button
+          icon="cards"
+          mode="contained"
+          style={{width: '100%', borderWidth: 2}}
+          onPress={() => navigation.navigate('CardComponent')}>
+          Cards Components
         </Button>
       </ScrollView>
     </View>
