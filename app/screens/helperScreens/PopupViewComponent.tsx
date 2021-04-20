@@ -6,8 +6,6 @@ import {code} from '../ButtonComponentScreen';
 import {ScrollView} from 'react-native-gesture-handler';
 import {COLORS} from '../../helpers/masterColor';
 import {ColorScreenList} from './ColorScreenList';
-import SyntaxHighlighter from 'react-native-syntax-highlighter';
-// import {docco} from 'react-syntax-highlighter/styles/hljs';
 interface PopupViewComponentProps {
   visible: boolean;
   hidePopUp: () => void;
@@ -30,56 +28,51 @@ export class PopupViewComponent extends Component<
   };
 
   render() {
-    const codeString = '(num) => num + 1';
     return (
       <Portal>
         <Dialog
           visible={this.props.visible}
           onDismiss={this.props.hidePopUp}
           style={{backgroundColor: '#e6ebff', maxHeight: 400}}>
-          <Text
-            style={{
-              textAlign: 'center',
-              marginTop: 10,
-              padding: 5,
-              fontSize: 20,
-              backgroundColor: '#b4bdd9',
-              width: '100%',
-            }}>
-            Code for component
-          </Text>
           <ScrollView>
             <View
               style={{
                 flexDirection: 'row',
-                justifyContent: 'flex-end',
-                padding: 0,
+                justifyContent: 'center',
+                alignItems: 'center',
               }}>
               <Button
+                contentStyle={{
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                }}
                 icon="content-copy"
                 onPress={() => {
                   Clipboard.setString(code);
                   this.showToastWithGravityAndOffset();
                 }}
-                style={{margin: 'auto', padding: 0, alignItems: 'center'}}
+                style={{
+                  alignItems: 'center',
+                }}
                 mode="text">
-                {}
+                Copy
               </Button>
               <Button
                 onPress={this.props.hidePopUp}
                 mode="text"
                 icon="close"
                 style={{margin: 0, padding: 0, alignItems: 'center'}}>
-                {}
+                Close
               </Button>
             </View>
             <Image
-              source={require('../../assets/code.png')}
+              source={require('../../assets/snippet1.png')}
               resizeMode="stretch"
               style={{
                 padding: 0,
                 margin: 0,
-                height: 200,
+                height: 290,
                 width: '100%',
               }}
             />
@@ -90,13 +83,34 @@ export class PopupViewComponent extends Component<
                 borderColor={COLORS[0].BtnColor as string}
               />
             </View>
-            <View>
+            <View style={{marginTop: 0, marginBottom: 10}}>
               <View
                 style={{
                   alignItems: 'center',
                   padding: 5,
                 }}>
-                <Text>Required Props</Text>
+                <Text style={{textTransform: 'uppercase'}}>Required Props</Text>
+              </View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'flex-start',
+                  justifyContent: 'center',
+                  margin: 10,
+                }}>
+                {propsData.map((item, idx) => (
+                  <View
+                    style={{
+                      width: '100%',
+                      backgroundColor: idx % 2 == 0 ? '#ebeefc' : '#0000',
+                      borderRadius: 2,
+                      height: 25,
+                      justifyContent: 'center',
+                    }}
+                    key={idx}>
+                    <Text style={{marginLeft: 5}}>{item}</Text>
+                  </View>
+                ))}
               </View>
             </View>
           </ScrollView>
@@ -105,3 +119,16 @@ export class PopupViewComponent extends Component<
     );
   }
 }
+
+const propsData = [
+  'onPress: () => any',
+  'width: string | number',
+  'borderRadius: number',
+  'text?: string',
+  'textSize?: number',
+  'textcolor?: string',
+  'margin: number',
+  'iconname?: string(fontawsome icons)',
+  'iconsize?: number',
+  'iconcolor?: string',
+];

@@ -7,6 +7,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {HomeScreen} from './app/screens/HomeScreen';
 import {ButtonComponentScreen} from './app/screens/ButtonComponentScreen';
 import {ColorScreen} from './app/screens/ColorScreen';
+import {CardScreen} from './app/screens/CardScreen';
 
 const Stack = createStackNavigator<AppParamList>();
 
@@ -23,6 +24,7 @@ const App = () => {
             component={ButtonComponentScreen}
           />
           <Stack.Screen name="MasterColors" component={ColorScreen} />
+          <Stack.Screen name="CardComponent" component={CardScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>

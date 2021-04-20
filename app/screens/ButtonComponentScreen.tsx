@@ -3,26 +3,39 @@ import React, {Component} from 'react';
 import {ImageSourcePropType, View} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
-import {color} from '../helpers/col';
 import {CustomButton} from './components/Buttons/Button';
 import {PopupViewComponent} from './helperScreens/PopupViewComponent';
 
 export const code: string = `
-<View style={{width: \'100%\'}}>
-<TouchableOpacity onPress={this.props.onpress}>
-<View
-style={{
-  backgroundColor: color.PRIMARY_COLOR,
-  height: 60,
-  borderRadius: 5,
-  justifyContent: 'center',
-}}>
-<Text style={{textAlign: 'center', fontSize: 20}}>
-Load code snipper
-{' </>'}
-</Text>
-</View>
-</TouchableOpacity>
+<View style={{width: this.props.width, margin: this.props.margin}}>
+  <TouchableOpacity onPress={this.props.onpress}>
+    <View
+      style={{
+        backgroundColor: this.props.color,
+        height: this.props.height,
+        borderRadius: this.props.borderRadius,
+        justifyContent: 'center',
+      }}>
+      {this.props.text && (
+        <Text
+          style={{
+            textAlign: 'center',
+            fontSize: this.props.textSize,
+            color: this.props.textcolor ? this.props.textcolor : 'black',
+          }}>
+          {this.props.text + '</>'}
+        </Text>
+      )}
+      {this.props.iconname && (
+        <FontAwesomeIcons
+          style={{alignSelf: 'center'}}
+          name={this.props.iconname}
+          size={this.props.iconsize}
+          color={this.props.iconcolor}
+        />
+      )}
+    </View>
+  </TouchableOpacity>
 </View>`;
 interface ButtonComponentScreenProps {
   navigation: StackNavigationProp<AppParamList, 'ButtonComponent'>;

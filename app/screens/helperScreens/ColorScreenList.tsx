@@ -17,7 +17,6 @@ export class ColorScreenList extends Component<ColorScreenListProps, {}> {
       <TouchableOpacity
         onPress={() => {
           Clipboard.setString(this.props.borderColor);
-          console.log(this.props.borderColor);
           this.props.showToast();
         }}>
         <View
@@ -48,8 +47,6 @@ export class ColorScreenList extends Component<ColorScreenListProps, {}> {
           <Text
             style={{
               flex: 1.5,
-              // alignItems: 'flex-end',
-              // justifyContent: 'flex-start',
               flexDirection: 'row',
               paddingLeft: 20,
               width: '100%',
@@ -67,7 +64,6 @@ export class ColorScreenList extends Component<ColorScreenListProps, {}> {
             icon="content-copy"
             onPress={() => {
               Clipboard.setString(this.props.borderColor);
-              console.log(this.props.borderColor);
               this.props.showToast();
             }}>
             {}
