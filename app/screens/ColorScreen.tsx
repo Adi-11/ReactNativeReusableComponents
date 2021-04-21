@@ -38,7 +38,7 @@ export class ColorScreen extends Component<ColorScreenProps, ColorScreenState> {
 
   render() {
     return (
-      <View style={{backgroundColor: '#c7d0ed'}}>
+      <View style={{backgroundColor: '#0000'}}>
         <Appbar.Header style={Appstyle.buttonScreenAppHeader}>
           <Appbar.BackAction
             onPress={() => {
@@ -51,13 +51,13 @@ export class ColorScreen extends Component<ColorScreenProps, ColorScreenState> {
           <FlatList
             contentContainerStyle={Appstyle.buttonScreenFlatList}
             data={COLORS}
-            keyExtractor={item => item.id as string}
+            keyExtractor={item => item.colorname}
             renderItem={({item}) => (
               <ColorScreenList
-                key={item.id as string}
-                id={item.id as string}
-                borderColor={Object.values(item)[0] as string}
-                colorName={Object.keys(item)[0] as string}
+                key={item.colorname}
+                id={item.colorcode}
+                borderColor={item.colorcode}
+                colorName={item.colorname}
                 showToast={this.showToastWithGravityAndOffset}
               />
             )}

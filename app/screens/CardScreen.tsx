@@ -4,7 +4,7 @@ import {View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Appbar} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
-import {IMAGE_SIZE} from '../helpers/constants';
+import {CustomButton} from './components/Buttons/Button';
 import {CustomCards} from './components/cards/Cards';
 
 interface CardScreenProps {
@@ -15,10 +15,9 @@ interface CardScreenState {}
 
 export class CardScreen extends Component<CardScreenProps, CardScreenState> {
   render() {
-    const imageUri =
-      'https://images.unsplash.com/photo-1569389397653-c04fe624e663?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwyNXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60';
+    // const imageUri = require('https://images.unsplash.com/photo-1618861764186-b050d53ce43e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');
     return (
-      <View style={{backgroundColor: '#c7d0ed', flex: 1}}>
+      <View style={{backgroundColor: '#0000', flex: 1}}>
         <Appbar.Header style={{marginLeft: 10}}>
           <Appbar.BackAction
             onPress={() => {
@@ -40,89 +39,51 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
           }}>
           <CustomCards
             onPress={() => console.log('ok')}
-            isCoverdImage={true}
-            cardHeight={200}
+            cardBackgroundColor={'#e8e8e8'}
+            cardHeight={150}
             cardWidth={'90%'}
-            cardBorderRadius={20}
-            titleText={'Card component 1'}
-            titleTextColor={'white'}
-            titleTextSize={22}
-            descText={'This is a reusable card Component'}
-            descTextColor={'white'}
-            descTextSize={18}
-            imageBorderRadius={20}
-            blurRaduis={4}
-            buttonProps={{
-              onPress: () => console.log('To be implemented'),
-              width: '60%',
-              height: 40,
-              btnText: 'Load Snippet',
-              margin: 10,
-              textSize: 20,
-              color: '#4f75ab',
-              borderRadius: 10,
-            }}
-            type={'row'}
-            CardImageUri={imageUri}
-          />
-          <CustomCards
-            onPress={() => console.log('ok')}
-            isCoverdImage={false}
-            cardBackgroundColor={'#a3adcc'}
-            cardHeight={200}
-            cardWidth={'90%'}
-            cardBorderRadius={20}
-            titleText={'Card component 1'}
-            titleTextColor={'white'}
-            titleTextSize={22}
-            descText={'This is a reusable card Component'}
-            descTextColor={'white'}
-            descTextSize={18}
-            imageBorderRadius={20}
-            blurRaduis={0}
-            buttonProps={{
-              onPress: () => console.log('To be implemented'),
-              width: '70%',
-              height: 40,
-              btnText: 'Load Snippet',
-              margin: 10,
-              textSize: 20,
-              color: '#4f75ab',
-              borderRadius: 10,
-            }}
-            type={'row'}
-            CardImageUri={imageUri}
-          />
-          <CustomCards
-            type={'row'}
-            onPress={() => console.log('ok')}
-            isCoverdImage={false}
-            cardBackgroundColor={'#a3adcc'}
-            cardHeight={200}
-            cardWidth={'90%'}
-            cardBorderRadius={0}
-            titleText={'Card component 1'}
-            titleTextColor={'white'}
-            titleTextSize={22}
+            cardBorderRadius={5}
+            titleText={'Save Water Save Life'}
+            titleTextColor={'black'}
+            titleTextSize={18}
             descText={
-              'dfdfgdhfghfdghfghfhfghdfhdfhdfhfhfhdfhdfghfhdfhfghfhdfhfghfghfdghfdhdfhg'
+              'To wash a Car without using technology and expertise a person would require above 30 Litres of water. Yawlit uses technology and training to reduce the excess wastage of water.'
             }
-            descTextColor={'white'}
-            descTextSize={18}
-            imageBorderRadius={50}
-            blurRaduis={0}
-            buttonProps={{
-              onPress: () => console.log('To be implemented'),
-              width: '70%',
-              height: 40,
-              btnText: 'Load Snippet',
-              margin: 10,
-              textSize: 20,
-              color: '#4f75ab',
-              borderRadius: 10,
-            }}
-            CardImageUri={imageUri}
+            descTextColor={'black'}
+            descTextSize={14}
+            imageBorderRadius={20}
+            CardImageUri={require('../assets/water.png')}
+            reverse={false}
           />
+          <CustomCards
+            onPress={() => console.log('ok')}
+            cardBackgroundColor={'#e8e8e8'}
+            cardHeight={250}
+            cardWidth={'90%'}
+            cardBorderRadius={5}
+            titleText={'Clean Healthy Environment and You'}
+            titleTextColor={'black'}
+            titleTextSize={18}
+            descText={
+              'Filthier than the average toilet and harboring a horde of spiteful germs, vehicular hygiene is the focal point of our testament to revolutionize this passive automobile industry and ensure a pristine driving experience to our patrons'
+            }
+            reverse={true}
+            descTextColor={'black'}
+            descTextSize={14}
+            imageBorderRadius={20}
+            CardImageUri={require('../assets/clean.png')}>
+            <CustomButton
+              onpress={() => console.log('ok')}
+              width={40}
+              color={'#4f75ab'}
+              height={40}
+              borderRadius={50}
+              margin={20}
+              iconname={'github'}
+              iconsize={40}
+              iconcolor={'white'}
+            />
+          </CustomCards>
         </ScrollView>
       </View>
     );

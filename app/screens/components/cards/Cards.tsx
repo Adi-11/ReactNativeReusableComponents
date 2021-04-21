@@ -1,14 +1,8 @@
 import React, {Component} from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacityBase,
-  View,
-} from 'react-native';
+import {Image, Text, View} from 'react-native';
 import {IMAGE_SIZE, SPACING} from '../../../helpers/constants';
-import {CustomButton} from '../Buttons/Button';
-
+import {Dimensions} from 'react-native';
+const {width, height} = Dimensions.get('window');
 interface CardsProps {
   onPress: () => any;
   cardHeight: number;
@@ -16,36 +10,33 @@ interface CardsProps {
   cardBorderRadius: number;
   CardImageUri?: string;
   cardBackgroundColor?: string;
-  isCoverdImage: boolean;
   imageBorderRadius: number;
   titleText: string;
   titleTextSize: number;
   titleTextColor: string;
-  blurRaduis?: number;
   descText: string;
   descTextSize: number;
   descTextColor: string;
-  type: string;
-  buttonProps?: {
-    onPress: () => any;
-    width: number | string;
-    height: number;
-    btnText: string;
-    textSize: number;
-    color: string;
-    margin: number;
-    borderRadius: number;
-  };
+  reverse?: boolean;
 }
 
-interface CardsState {}
+interface CardsState {
+  Children: any;
+}
 
 export class CustomCards extends Component<CardsProps, CardsState> {
+  constructor(props: CardsProps) {
+    super(props);
+  }
+
+  componentDidMount = () => {
+    console.log(this.props.children);
+  };
   render() {
     return (
       <View
         style={{
-          flexDirection: this.props.type === 'row' ? 'row' : 'column',
+          flexDirection: !this.props.reverse ? 'row' : 'row-reverse',
           padding: SPACING,
           borderRadius: this.props.cardBorderRadius,
           width: this.props.cardWidth,
@@ -55,57 +46,55 @@ export class CustomCards extends Component<CardsProps, CardsState> {
         }}>
         <Image
           style={[
-            this.props.isCoverdImage && StyleSheet.absoluteFillObject,
             {
               borderRadius: this.props.imageBorderRadius,
             },
-            !this.props.isCoverdImage && {
-              width: IMAGE_SIZE,
-              height: IMAGE_SIZE,
-              marginTop: IMAGE_SIZE / 2,
-              marginRight: SPACING / 2,
+            {
+              width: IMAGE_SIZE / 2 + 10,
+              height: IMAGE_SIZE / 2 + 10,
             },
           ]}
-          source={{
-            uri: this.props.CardImageUri,
-          }}
-          blurRadius={this.props.blurRaduis ? this.props.blurRaduis : 0}
+          source={this.props.CardImageUri as any}
         />
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-          <Text
-            style={{
-              fontSize: this.props.titleTextSize,
-              color: this.props.titleTextColor,
-              fontWeight: '600',
-              marginBottom: 10,
-            }}>
-            {this.props.titleText}
-          </Text>
-          <Text
-            style={{
-              fontSize: this.props.descTextSize,
-              textAlignVertical: 'top',
-              color: this.props.descTextColor,
-            }}
-            numberOfLines={2}>
-            {this.props.descText}
-          </Text>
-
-          <CustomButton
-            onpress={() => this.props.buttonProps?.onPress()}
-            width={this.props.buttonProps?.width!}
-            height={this.props.buttonProps?.height!}
-            text={this.props.buttonProps?.btnText!}
-            margin={this.props.buttonProps?.margin!}
-            textSize={this.props.buttonProps?.textSize}
-            color={this.props.buttonProps?.color!}
-            borderRadius={this.props.buttonProps?.borderRadius!}
-          />
+        <View>
+          <View
+            style={[
+              {
+                alignItems: 'center',
+                justifyContent: !this.props.reverse ? 'center' : 'flex-end',
+              },
+              this.props.reverse
+                ? {marginRight: 10, width: width - 120}
+                : {marginLeft: 20},
+            ]}>
+            <Text
+              style={{
+                fontSize: this.props.titleTextSize,
+                color: this.props.titleTextColor,
+                marginBottom: 10,
+              }}>
+              {this.props.titleText}
+            </Text>
+          </View>
+          <View
+            style={[
+              {
+                position: 'absolute',
+                top: 60,
+                width: !this.props.reverse ? width - 70 : width - 60,
+                opacity: 0.7,
+              },
+              this.props.reverse ? {right: -50} : {left: -50},
+            ]}>
+            <Text
+              style={{
+                fontSize: this.props.descTextSize,
+                textAlign: 'justify',
+                color: this.props.descTextColor,
+              }}>
+              {this.props.descText}
+            </Text>
+          </View>
         </View>
       </View>
     );

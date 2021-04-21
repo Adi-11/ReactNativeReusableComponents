@@ -71,7 +71,7 @@ export class ButtonComponentScreen extends Component<
 
   render() {
     return (
-      <View style={{backgroundColor: '#c7d0ed', flex: 1}}>
+      <View style={{backgroundColor: '#0000', flex: 1}}>
         <Appbar.Header style={{marginLeft: 10}}>
           <Appbar.BackAction
             onPress={() => {
@@ -106,7 +106,7 @@ export class ButtonComponentScreen extends Component<
             height={60}
             borderRadius={0}
             text={'Load code snippet'}
-            textcolor={'#c7d0ed'}
+            textcolor={'white'}
             textSize={20}
             margin={10}
           />
@@ -116,7 +116,7 @@ export class ButtonComponentScreen extends Component<
             color={'#4f75ab'}
             height={40}
             textcolor={'white'}
-            borderRadius={20}
+            borderRadius={10}
             text={'Load code snippet'}
             textSize={15}
             margin={10}
@@ -135,24 +135,24 @@ export class ButtonComponentScreen extends Component<
           <View style={{flexDirection: 'row'}}>
             <CustomButton
               onpress={this.showModal}
-              width={70}
+              width={40}
               color={'#4f75ab'}
-              height={70}
+              height={40}
               borderRadius={50}
-              margin={10}
+              margin={20}
               iconname={'github'}
-              iconsize={55}
+              iconsize={40}
               iconcolor={'white'}
             />
             <CustomButton
               onpress={this.showModal}
-              width={70}
+              width={40}
               color={'#4f75ab'}
-              height={70}
+              height={40}
               borderRadius={10}
-              margin={10}
+              margin={20}
               iconname={'github'}
-              iconsize={55}
+              iconsize={40}
               iconcolor={'white'}
             />
           </View>
@@ -162,7 +162,7 @@ export class ButtonComponentScreen extends Component<
               width={'40%'}
               color={'#4f75ab'}
               height={40}
-              borderRadius={50}
+              borderRadius={10}
               text={'code'}
               textSize={20}
               margin={10}
@@ -173,7 +173,7 @@ export class ButtonComponentScreen extends Component<
               color={'#4f75ab'}
               height={40}
               textcolor={'white'}
-              borderRadius={10}
+              borderRadius={5}
               text={'code'}
               textSize={20}
               margin={10}

@@ -5,9 +5,9 @@ export const Appstyle = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 0,
-    marginTop: 90,
-    bottom: 90,
-    backgroundColor: '#c7d0ed',
+    paddingTop: 20,
+    marginTop: 100,
+    bottom: 110,
+    backgroundColor: '#0000',
   },
 });

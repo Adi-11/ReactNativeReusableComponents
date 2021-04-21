@@ -80,7 +80,7 @@ export class PopupViewComponent extends Component<
               <ColorScreenList
                 colorName={'BtnColor'}
                 showToast={this.showToastWithGravityAndOffset}
-                borderColor={COLORS[0].BtnColor as string}
+                borderColor={COLORS[0].colorname as string}
               />
             </View>
             <View style={{marginTop: 0, marginBottom: 10}}>

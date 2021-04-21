@@ -28,11 +28,11 @@ export class ColorScreenList extends Component<ColorScreenListProps, {}> {
             width: '85%',
             margin: 10,
             marginLeft: 20,
-            height: 40,
-            borderRadius: 10,
+            height: 45,
+            borderRadius: 5,
             borderColor: this.props.borderColor,
-            borderWidth: 1,
-            borderLeftWidth: 10,
+            borderWidth: 3,
+            borderLeftWidth: 20,
           }}>
           <Text
             style={{
