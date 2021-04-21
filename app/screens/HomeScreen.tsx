@@ -1,10 +1,10 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
-import {StatusBar, Text, View} from 'react-native';
+import {StatusBar, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Appbar, Button} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
-import {CustomButton} from './components/Buttons/Button';
+import {BannerComponent} from './helperScreens/Banner';
 
 interface HomeScreenProps {
   navigation: StackNavigationProp<AppParamList, 'Home'>;
@@ -23,6 +23,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
   return (
     <View style={{backgroundColor: '#0000', flex: 1}}>
+      <BannerComponent />
       <Appbar.Header style={{marginLeft: 10}}>
         <StatusBar barStyle={'dark-content'} />
         <Appbar.Content
@@ -37,7 +38,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         contentContainerStyle={{
           flexGrow: 1,
           alignItems: 'flex-start',
-          bottom: 20,
+          bottom: 0,
           margin: 10,
         }}>
         <Button

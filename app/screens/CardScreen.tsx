@@ -1,12 +1,12 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {Component} from 'react';
-import {View} from 'react-native';
+import {Dimensions, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Appbar} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
 import {CustomButton} from './components/Buttons/Button';
 import {CustomCards} from './components/cards/Cards';
-
+const {width, height} = Dimensions.get('window');
 interface CardScreenProps {
   navigation: StackNavigationProp<AppParamList, 'CardComponent'>;
 }
@@ -17,7 +17,7 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
   render() {
     // const imageUri = require('https://images.unsplash.com/photo-1618861764186-b050d53ce43e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');
     return (
-      <View style={{backgroundColor: '#0000', flex: 1}}>
+      <View style={{flex: 1}}>
         <Appbar.Header style={{marginLeft: 10}}>
           <Appbar.BackAction
             onPress={() => {
@@ -26,7 +26,7 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
           />
           <Appbar.Content title="Card Component" />
           <Appbar.Action
-            icon={'invert-colors'}
+            icon={'format-color-fill'}
             onPress={() => this.props.navigation.navigate('MasterColors')}
           />
         </Appbar.Header>
@@ -40,7 +40,7 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
           <CustomCards
             onPress={() => console.log('ok')}
             cardBackgroundColor={'#e8e8e8'}
-            cardHeight={150}
+            cardHeight={200}
             cardWidth={'90%'}
             cardBorderRadius={5}
             titleText={'Save Water Save Life'}
@@ -53,12 +53,23 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
             descTextSize={14}
             imageBorderRadius={20}
             CardImageUri={require('../assets/water.png')}
-            reverse={false}
-          />
+            reverse={false}>
+            <CustomButton
+              onpress={() => console.log('ok')}
+              width={'60%'}
+              color={'rgba(145, 187, 255, 0.5)'}
+              height={40}
+              textcolor={'black'}
+              borderRadius={10}
+              text={'Load code snippet'}
+              textSize={15}
+              margin={10}
+            />
+          </CustomCards>
           <CustomCards
             onPress={() => console.log('ok')}
             cardBackgroundColor={'#e8e8e8'}
-            cardHeight={250}
+            cardHeight={220}
             cardWidth={'90%'}
             cardBorderRadius={5}
             titleText={'Clean Healthy Environment and You'}
@@ -74,14 +85,14 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
             CardImageUri={require('../assets/clean.png')}>
             <CustomButton
               onpress={() => console.log('ok')}
-              width={40}
-              color={'#4f75ab'}
+              width={'60%'}
+              color={'rgba(145, 187, 255, 0.5)'}
               height={40}
-              borderRadius={50}
-              margin={20}
-              iconname={'github'}
-              iconsize={40}
-              iconcolor={'white'}
+              textcolor={'black'}
+              borderRadius={10}
+              text={'Load code snippet'}
+              textSize={15}
+              margin={10}
             />
           </CustomCards>
         </ScrollView>

@@ -20,9 +20,7 @@ interface CardsProps {
   reverse?: boolean;
 }
 
-interface CardsState {
-  Children: any;
-}
+interface CardsState {}
 
 export class CustomCards extends Component<CardsProps, CardsState> {
   constructor(props: CardsProps) {
@@ -30,7 +28,7 @@ export class CustomCards extends Component<CardsProps, CardsState> {
   }
 
   componentDidMount = () => {
-    console.log(this.props.children);
+    // console.log(this.props.children);
   };
   render() {
     return (
@@ -48,8 +46,6 @@ export class CustomCards extends Component<CardsProps, CardsState> {
           style={[
             {
               borderRadius: this.props.imageBorderRadius,
-            },
-            {
               width: IMAGE_SIZE / 2 + 10,
               height: IMAGE_SIZE / 2 + 10,
             },
@@ -71,6 +67,8 @@ export class CustomCards extends Component<CardsProps, CardsState> {
               style={{
                 fontSize: this.props.titleTextSize,
                 color: this.props.titleTextColor,
+                justifyContent: 'center',
+                marginTop: 10,
                 marginBottom: 10,
               }}>
               {this.props.titleText}
@@ -82,7 +80,6 @@ export class CustomCards extends Component<CardsProps, CardsState> {
                 position: 'absolute',
                 top: 60,
                 width: !this.props.reverse ? width - 70 : width - 60,
-                opacity: 0.7,
               },
               this.props.reverse ? {right: -50} : {left: -50},
             ]}>
@@ -91,9 +88,19 @@ export class CustomCards extends Component<CardsProps, CardsState> {
                 fontSize: this.props.descTextSize,
                 textAlign: 'justify',
                 color: this.props.descTextColor,
+                opacity: 0.6,
               }}>
               {this.props.descText}
             </Text>
+            <View
+              style={[
+                this.props.reverse
+                  ? {marginLeft: 0}
+                  : {marginLeft: 110, width: '100%'},
+                {},
+              ]}>
+              {this.props.children}
+            </View>
           </View>
         </View>
       </View>

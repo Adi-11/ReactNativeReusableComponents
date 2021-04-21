@@ -80,7 +80,7 @@ export class ButtonComponentScreen extends Component<
           />
           <Appbar.Content title="Button Component" />
           <Appbar.Action
-            icon={'invert-colors'}
+            icon={'format-color-fill'}
             onPress={() => this.props.navigation.navigate('MasterColors')}
           />
         </Appbar.Header>
@@ -92,7 +92,7 @@ export class ButtonComponentScreen extends Component<
           <CustomButton
             onpress={this.showModal}
             width={'90%'}
-            color={'#4f75ab'}
+            color={'#a4c3f5'}
             height={60}
             borderRadius={5}
             text={'Load code snippet'}
@@ -102,20 +102,20 @@ export class ButtonComponentScreen extends Component<
           <CustomButton
             onpress={this.showModal}
             width={'90%'}
-            color={'#4f75ab'}
+            color={'#a4c3f5'}
             height={60}
             borderRadius={0}
             text={'Load code snippet'}
-            textcolor={'white'}
+            textcolor={'black'}
             textSize={20}
             margin={10}
           />
           <CustomButton
             onpress={this.showModal}
             width={'60%'}
-            color={'#4f75ab'}
+            color={'#a4c3f5'}
             height={40}
-            textcolor={'white'}
+            textcolor={'black'}
             borderRadius={10}
             text={'Load code snippet'}
             textSize={15}
@@ -124,7 +124,7 @@ export class ButtonComponentScreen extends Component<
           <CustomButton
             onpress={this.showModal}
             width={'60%'}
-            color={'#4f75ab'}
+            color={'#a4c3f5'}
             height={40}
             textcolor={'black'}
             borderRadius={5}
@@ -136,31 +136,31 @@ export class ButtonComponentScreen extends Component<
             <CustomButton
               onpress={this.showModal}
               width={40}
-              color={'#4f75ab'}
+              color={'#a4c3f5'}
               height={40}
               borderRadius={50}
               margin={20}
               iconname={'github'}
               iconsize={40}
-              iconcolor={'white'}
+              iconcolor={'black'}
             />
             <CustomButton
               onpress={this.showModal}
               width={40}
-              color={'#4f75ab'}
+              color={'#a4c3f5'}
               height={40}
               borderRadius={10}
               margin={20}
               iconname={'github'}
               iconsize={40}
-              iconcolor={'white'}
+              iconcolor={'black'}
             />
           </View>
           <View style={{flexDirection: 'row'}}>
             <CustomButton
               onpress={this.showModal}
               width={'40%'}
-              color={'#4f75ab'}
+              color={'#a4c3f5'}
               height={40}
               borderRadius={10}
               text={'code'}
@@ -170,9 +170,9 @@ export class ButtonComponentScreen extends Component<
             <CustomButton
               onpress={this.showModal}
               width={'40%'}
-              color={'#4f75ab'}
+              color={'#a4c3f5'}
               height={40}
-              textcolor={'white'}
+              textcolor={'black'}
               borderRadius={5}
               text={'code'}
               textSize={20}
