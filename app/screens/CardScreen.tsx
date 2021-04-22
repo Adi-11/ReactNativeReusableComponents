@@ -7,6 +7,7 @@ import {AppParamList} from '../helpers/AppParamList';
 import {card} from '../helpers/snippets';
 import {CustomButton} from './components/Buttons/Button';
 import {CustomCards} from './components/cards/Cards';
+import {HeaderComponent} from './helperScreens/HeaderComponent';
 import {PopupViewComponent} from './helperScreens/PopupViewComponent';
 const {width, height} = Dimensions.get('window');
 interface CardScreenProps {
@@ -57,18 +58,10 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
   render() {
     return (
       <View style={{flex: 1}}>
-        <Appbar.Header style={{marginLeft: 10}}>
-          <Appbar.BackAction
-            onPress={() => {
-              this.props.navigation.goBack();
-            }}
-          />
-          <Appbar.Content title="Card Component" />
-          <Appbar.Action
-            icon={'format-color-fill'}
-            onPress={() => this.props.navigation.navigate('MasterColors')}
-          />
-        </Appbar.Header>
+        <HeaderComponent
+          navigation={this.props.navigation}
+          componentName={'Card Component'}
+        />
         <ScrollView
           style={{paddingTop: 30}}
           contentContainerStyle={{

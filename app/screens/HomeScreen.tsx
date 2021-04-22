@@ -51,9 +51,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         <Button
           icon="cards"
           mode="contained"
-          style={{width: '100%', borderWidth: 2}}
+          style={{width: '100%', borderWidth: 2, marginBottom: 20}}
           onPress={() => navigation.navigate('CardComponent')}>
           Cards Components
+        </Button>
+        <Button
+          icon="svg"
+          mode="contained"
+          style={{width: '100%', borderWidth: 2, marginBottom: 20}}
+          onPress={() => navigation.navigate('SVGComponent')}>
+          SVG animation
         </Button>
       </ScrollView>
     </View>

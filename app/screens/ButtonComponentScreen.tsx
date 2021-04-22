@@ -5,6 +5,7 @@ import {Appbar} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
 import {button} from '../helpers/snippets';
 import {CustomButton} from './components/Buttons/Button';
+import {HeaderComponent} from './helperScreens/HeaderComponent';
 import {PopupViewComponent} from './helperScreens/PopupViewComponent';
 
 interface ButtonComponentScreenProps {
@@ -55,18 +56,10 @@ export class ButtonComponentScreen extends Component<
   render() {
     return (
       <View style={{backgroundColor: '#0000', flex: 1}}>
-        <Appbar.Header style={{marginLeft: 10}}>
-          <Appbar.BackAction
-            onPress={() => {
-              this.props.navigation.goBack();
-            }}
-          />
-          <Appbar.Content title="Button Component" />
-          <Appbar.Action
-            icon={'format-color-fill'}
-            onPress={() => this.props.navigation.navigate('MasterColors')}
-          />
-        </Appbar.Header>
+        <HeaderComponent
+          navigation={this.props.navigation}
+          componentName={'Button Component'}
+        />
         <View
           style={{
             alignItems: 'center',

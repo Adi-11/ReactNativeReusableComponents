@@ -3,4 +3,5 @@ export type AppParamList = {
   ButtonComponent: undefined;
   MasterColors: undefined;
   CardComponent: undefined;
+  SVGComponent: undefined;
 };

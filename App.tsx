@@ -20,6 +20,7 @@ import {CardScreen} from './app/screens/CardScreen';
 import {GlobalContext} from './app/context/GlobalProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {View} from 'react-native';
+import {SvgScreen} from './app/screens/SvgScreen';
 
 const Stack = createStackNavigator<AppParamList>();
 const CustomDefaultTheme = {
@@ -50,6 +51,7 @@ const App = () => {
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
   useEffect(() => {
+    // (async () => await AsyncStorage.removeItem('theme'))();
     setLoading(true);
   }, []);
   useEffect(() => {
@@ -58,6 +60,7 @@ const App = () => {
   }, [isThemed]);
   const _handler = async () => {
     try {
+      setLoading(true);
       let themeValue = await AsyncStorage.getItem('theme');
       if (themeValue) {
         setIsThemed(themeValue);
@@ -105,8 +108,9 @@ const App = () => {
               name="ButtonComponent"
               component={ButtonComponentScreen}
             />
-            <Stack.Screen name="MasterColors" component={ColorScreen} />
             <Stack.Screen name="CardComponent" component={CardScreen} />
+            <Stack.Screen name="SVGComponent" component={SvgScreen} />
+            <Stack.Screen name="MasterColors" component={ColorScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </GlobalContext.Provider>

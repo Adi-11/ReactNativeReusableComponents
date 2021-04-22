@@ -105,7 +105,7 @@ export class PopupViewComponent extends Component<
                   <View
                     style={{
                       width: '100%',
-                      backgroundColor: idx % 2 == 0 ? '#4c4d4f' : '#0000',
+                      backgroundColor: idx % 2 == 0 ? '#978fa8' : '#0000',
                       borderRadius: 2,
                       height: 25,
                       justifyContent: 'center',
