@@ -1,14 +1,16 @@
 import React, {Component} from 'react';
-import {Image, Text, ToastAndroid, View} from 'react-native';
-import {Portal, Dialog, Button} from 'react-native-paper';
+import {Image, ToastAndroid, View} from 'react-native';
+import {Portal, Dialog, Button, Text} from 'react-native-paper';
 import Clipboard from '@react-native-clipboard/clipboard';
-import {code} from '../ButtonComponentScreen';
 import {ScrollView} from 'react-native-gesture-handler';
 import {COLORS} from '../../helpers/masterColor';
 import {ColorScreenList} from './ColorScreenList';
 interface PopupViewComponentProps {
   visible: boolean;
   hidePopUp: () => void;
+  propsData: string[];
+  image: any;
+  copied: string;
 }
 
 interface PopupViewComponentState {}
@@ -26,6 +28,7 @@ export class PopupViewComponent extends Component<
       50,
     );
   };
+  componentDidMount = () => {};
 
   render() {
     return (
@@ -33,7 +36,7 @@ export class PopupViewComponent extends Component<
         <Dialog
           visible={this.props.visible}
           onDismiss={this.props.hidePopUp}
-          style={{backgroundColor: '#e6ebff', maxHeight: 400}}>
+          style={{maxHeight: 400}}>
           <ScrollView>
             <View
               style={{
@@ -49,7 +52,7 @@ export class PopupViewComponent extends Component<
                 }}
                 icon="content-copy"
                 onPress={() => {
-                  Clipboard.setString(code);
+                  Clipboard.setString(this.props.copied);
                   this.showToastWithGravityAndOffset();
                 }}
                 style={{
@@ -67,12 +70,12 @@ export class PopupViewComponent extends Component<
               </Button>
             </View>
             <Image
-              source={require('../../assets/snippet1.png')}
+              source={this.props.image}
               resizeMode="stretch"
               style={{
                 padding: 0,
                 margin: 0,
-                height: 290,
+                height: 600,
                 width: '100%',
               }}
             />
@@ -98,11 +101,11 @@ export class PopupViewComponent extends Component<
                   justifyContent: 'center',
                   margin: 10,
                 }}>
-                {propsData.map((item, idx) => (
+                {this.props.propsData.map((item, idx) => (
                   <View
                     style={{
                       width: '100%',
-                      backgroundColor: idx % 2 == 0 ? '#ebeefc' : '#0000',
+                      backgroundColor: idx % 2 == 0 ? '#4c4d4f' : '#0000',
                       borderRadius: 2,
                       height: 25,
                       justifyContent: 'center',
@@ -119,16 +122,3 @@ export class PopupViewComponent extends Component<
     );
   }
 }
-
-const propsData = [
-  'onPress: () => any',
-  'width: string | number',
-  'borderRadius: number',
-  'text?: string',
-  'textSize?: number',
-  'textcolor?: string',
-  'margin: number',
-  'iconname?: string(fontawsome icons)',
-  'iconsize?: number',
-  'iconcolor?: string',
-];

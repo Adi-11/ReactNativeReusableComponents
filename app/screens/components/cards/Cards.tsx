@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {Image, Text, View} from 'react-native';
 import {IMAGE_SIZE, SPACING} from '../../../helpers/constants';
 import {Dimensions} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const {width, height} = Dimensions.get('window');
 interface CardsProps {
-  onPress: () => any;
   cardHeight: number;
   cardWidth: string | number;
   cardBorderRadius: number;
@@ -27,9 +27,7 @@ export class CustomCards extends Component<CardsProps, CardsState> {
     super(props);
   }
 
-  componentDidMount = () => {
-    // console.log(this.props.children);
-  };
+  componentDidMount = async () => {};
   render() {
     return (
       <View

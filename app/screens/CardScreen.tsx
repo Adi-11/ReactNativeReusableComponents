@@ -4,18 +4,57 @@ import {Dimensions, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Appbar} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
+import {card} from '../helpers/snippets';
 import {CustomButton} from './components/Buttons/Button';
 import {CustomCards} from './components/cards/Cards';
+import {PopupViewComponent} from './helperScreens/PopupViewComponent';
 const {width, height} = Dimensions.get('window');
 interface CardScreenProps {
   navigation: StackNavigationProp<AppParamList, 'CardComponent'>;
 }
 
-interface CardScreenState {}
+interface CardScreenState {
+  modalVisisble: boolean;
+  colorModalView: boolean;
+}
+
+const cardProps = [
+  'cardHeight: number',
+  'cardBorderRadius: number',
+  'cardWidth: string | number',
+  'CardImageUri?: string',
+  'cardBackgroundColor?: string',
+  'imageBorderRadius: number',
+  'titleText: string',
+  'titleTextSize: number',
+  'titleTextColor: string',
+  'descText: string',
+  'descTextSize: number',
+  'descTextColor: string',
+  'reverse?: boolean',
+];
 
 export class CardScreen extends Component<CardScreenProps, CardScreenState> {
+  constructor(props: CardScreenProps) {
+    super(props);
+    this.state = {
+      modalVisisble: false,
+      colorModalView: true,
+    };
+  }
+
+  hideModal = () => {
+    this.setState({
+      modalVisisble: false,
+    });
+  };
+  showModal = () => {
+    this.setState({
+      modalVisisble: true,
+    });
+  };
+
   render() {
-    // const imageUri = require('https://images.unsplash.com/photo-1618861764186-b050d53ce43e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80');
     return (
       <View style={{flex: 1}}>
         <Appbar.Header style={{marginLeft: 10}}>
@@ -38,9 +77,8 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
             bottom: 20,
           }}>
           <CustomCards
-            onPress={() => console.log('ok')}
             cardBackgroundColor={'#e8e8e8'}
-            cardHeight={200}
+            cardHeight={210}
             cardWidth={'90%'}
             cardBorderRadius={5}
             titleText={'Save Water Save Life'}
@@ -55,7 +93,7 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
             CardImageUri={require('../assets/water.png')}
             reverse={false}>
             <CustomButton
-              onpress={() => console.log('ok')}
+              onpress={() => this.showModal()}
               width={'60%'}
               color={'rgba(145, 187, 255, 0.5)'}
               height={40}
@@ -67,7 +105,6 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
             />
           </CustomCards>
           <CustomCards
-            onPress={() => console.log('ok')}
             cardBackgroundColor={'#e8e8e8'}
             cardHeight={220}
             cardWidth={'90%'}
@@ -84,7 +121,7 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
             imageBorderRadius={20}
             CardImageUri={require('../assets/clean.png')}>
             <CustomButton
-              onpress={() => console.log('ok')}
+              onpress={() => this.showModal()}
               width={'60%'}
               color={'rgba(145, 187, 255, 0.5)'}
               height={40}
@@ -96,6 +133,13 @@ export class CardScreen extends Component<CardScreenProps, CardScreenState> {
             />
           </CustomCards>
         </ScrollView>
+        <PopupViewComponent
+          image={require('../assets/snippet2.png')}
+          hidePopUp={this.hideModal}
+          propsData={cardProps}
+          visible={this.state.modalVisisble}
+          copied={card}
+        />
       </View>
     );
   }
