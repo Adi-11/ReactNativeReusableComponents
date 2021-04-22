@@ -1,5 +1,5 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {StatusBar, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Appbar, Button} from 'react-native-paper';
@@ -11,19 +11,14 @@ interface HomeScreenProps {
 }
 
 export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
-  const [isBanner, setIsBanner] = useState<boolean>(false);
-
   useEffect(() => {
     // console.log('hello');
   });
 
   const _handleSearch = () => console.log('Searching to be implemented');
 
-  const _handleMore = () => console.log('Show more to be implemented');
-
   return (
     <View style={{backgroundColor: '#0000', flex: 1}}>
-      <BannerComponent />
       <Appbar.Header style={{marginLeft: 10}}>
         <StatusBar barStyle={'dark-content'} />
         <Appbar.Content
@@ -31,7 +26,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           subtitle="React native components"
         />
         <Appbar.Action icon="magnify" onPress={_handleSearch} />
-        <Appbar.Action icon="dots-vertical" onPress={_handleMore} />
+        <BannerComponent />
       </Appbar.Header>
       <ScrollView
         style={{paddingTop: 30}}
