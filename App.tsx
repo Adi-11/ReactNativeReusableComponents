@@ -21,6 +21,7 @@ import {GlobalContext} from './app/context/GlobalProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {View} from 'react-native';
 import {SvgScreen} from './app/screens/SvgScreen';
+import {FormsScreen} from './app/screens/FormsScreen';
 
 const Stack = createStackNavigator<AppParamList>();
 const CustomDefaultTheme = {
@@ -102,15 +103,17 @@ const App = () => {
         <NavigationContainer theme={theme}>
           <Stack.Navigator
             initialRouteName="Home"
-            screenOptions={{headerShown: false}}>
+            screenOptions={{headerShown: false}}
+            headerMode={'float'}>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen
               name="ButtonComponent"
               component={ButtonComponentScreen}
             />
             <Stack.Screen name="CardComponent" component={CardScreen} />
-            <Stack.Screen name="SVGComponent" component={SvgScreen} />
             <Stack.Screen name="MasterColors" component={ColorScreen} />
+            <Stack.Screen name="FromsComponent" component={FormsScreen} />
+            <Stack.Screen name="SVGComponent" component={SvgScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </GlobalContext.Provider>

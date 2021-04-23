@@ -57,6 +57,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           onPress={() => navigation.navigate('SVGComponent')}>
           SVG animation
         </Button>
+        <Button
+          icon="file-eye"
+          mode="contained"
+          style={{width: '100%', borderWidth: 2, marginBottom: 20}}
+          onPress={() => navigation.navigate('FromsComponent')}>
+          Forms Components
+        </Button>
       </ScrollView>
     </View>
   );

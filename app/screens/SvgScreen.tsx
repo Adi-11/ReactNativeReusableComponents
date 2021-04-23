@@ -1,7 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect, useRef} from 'react';
 import {View, Animated, StyleSheet, TextInput} from 'react-native';
-import SVG, {G, Circle} from 'react-native-svg';
+import SVG, {G, Circle, Ellipse} from 'react-native-svg';
 import {AppParamList} from '../helpers/AppParamList';
 import {HeaderComponent} from './helperScreens/HeaderComponent';
 
@@ -91,6 +91,8 @@ export const SvgScreen: React.FC<SvgScreenProps> = ({
                 opacity={0.6}
               />
               <AnimatedCircle
+                fill={'red'}
+                fillRule={'evenodd'}
                 ref={circleRef}
                 cx="50%"
                 cy="50%"
