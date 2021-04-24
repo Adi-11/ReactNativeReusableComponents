@@ -19,9 +19,12 @@ import {ColorScreen} from './app/screens/ColorScreen';
 import {CardScreen} from './app/screens/CardScreen';
 import {GlobalContext} from './app/context/GlobalProvider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {View} from 'react-native';
+import {Alert, View} from 'react-native';
 import {SvgScreen} from './app/screens/SvgScreen';
 import {FormsScreen} from './app/screens/FormsScreen';
+import {MapScreen} from './app/screens/MapScreen';
+import Geolocation from 'react-native-geolocation-service';
+import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 
 const Stack = createStackNavigator<AppParamList>();
 const CustomDefaultTheme = {
@@ -50,10 +53,29 @@ const App = () => {
   const [isThemed, setIsThemed] = useState<string>('false');
   const [loading, setLoading] = useState<boolean>(true);
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
+  const [location, setLocation] = useState<any>();
 
   useEffect(() => {
-    // (async () => await AsyncStorage.removeItem('theme'))();
     setLoading(true);
+
+    (async () => {
+      let permission = await request(PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION);
+      if (permission === 'granted') {
+        Geolocation.getCurrentPosition(
+          ({coords}) => {
+            setLocation(coords);
+          },
+          (error: Geolocation.GeoError) => {
+            Alert.prompt('No Permission Granted');
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 15000,
+            maximumAge: 10000,
+          },
+        );
+      }
+    })();
   }, []);
   useEffect(() => {
     setLoading(true);
@@ -114,6 +136,7 @@ const App = () => {
             <Stack.Screen name="MasterColors" component={ColorScreen} />
             <Stack.Screen name="FromsComponent" component={FormsScreen} />
             <Stack.Screen name="SVGComponent" component={SvgScreen} />
+            <Stack.Screen name="MapsComponent" component={MapScreen} />
           </Stack.Navigator>
         </NavigationContainer>
       </GlobalContext.Provider>

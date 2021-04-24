@@ -64,6 +64,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           onPress={() => navigation.navigate('FromsComponent')}>
           Forms Components
         </Button>
+        <Button
+          icon="map"
+          mode="contained"
+          style={{width: '100%', borderWidth: 2, marginBottom: 20}}
+          onPress={() => navigation.navigate('MapsComponent')}>
+          Maps Component
+        </Button>
       </ScrollView>
     </View>
   );

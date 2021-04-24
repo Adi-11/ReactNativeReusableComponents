@@ -1,7 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {Component, createRef} from 'react';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import {Button, Text, TextInput} from 'react-native-paper';
+import {IconButton, Text, TextInput} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
 import {HeaderComponent} from './helperScreens/HeaderComponent';
 import {CustomButton} from './components/Buttons/Button';
@@ -36,9 +36,7 @@ export class FormsScreen extends Component<FormsScreenProps, FormsScreenState> {
         <ScrollView>
           <View style={styles.background}>
             <View style={styles.emailInput}>
-              <Button icon="cellphone-android" style={{padding: 0}}>
-                {}
-              </Button>
+              <IconButton icon="cellphone-android" size={25} />
               <TextInput
                 style={[styles.inputText]}
                 placeholder="Mobile Number"
@@ -47,7 +45,7 @@ export class FormsScreen extends Component<FormsScreenProps, FormsScreenState> {
               />
             </View>
             <View style={styles.pinTextView}>
-              <Text style={{fontSize: 20}}>Input 4 digit PIN</Text>
+              <Text style={{fontSize: 20}}>Enter 4 digit PIN</Text>
             </View>
             <View style={styles.pinInputView}>
               <TextInput

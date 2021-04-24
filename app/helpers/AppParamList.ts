@@ -5,4 +5,5 @@ export type AppParamList = {
   CardComponent: undefined;
   SVGComponent: undefined;
   FromsComponent: undefined;
+  MapsComponent: undefined;
 };
