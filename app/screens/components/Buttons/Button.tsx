@@ -38,7 +38,7 @@ export class CustomButton extends Component<ButtonProps, ButtonState> {
                   fontSize: this.props.textSize,
                   color: this.props.textcolor ? this.props.textcolor : 'black',
                 }}>
-                {this.props.text + '</>'}
+                {this.props.text}
               </Text>
             )}
             {this.props.iconname && (
