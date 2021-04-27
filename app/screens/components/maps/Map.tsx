@@ -1,12 +1,26 @@
-import React, {Component} from 'react';
-import {StyleSheet, View, Dimensions, Animated, Keyboard} from 'react-native';
+import React, {Component, PureComponent} from 'react';
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Animated,
+  Keyboard,
+  EmitterSubscription,
+  ScrollView,
+} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import MapView, {PROVIDER_DEFAULT, Region} from 'react-native-maps';
 const {width, height} = Dimensions.get('window');
 import SearchBar from 'react-native-dynamic-search-bar';
-import {IconButton, Text, TextInput} from 'react-native-paper';
-import {search_API} from '../../../helpers/keys';
+import {
+  ActivityIndicator,
+  IconButton,
+  Text,
+  TextInput,
+} from 'react-native-paper';
+import {address_API, search_API} from '../../../helpers/keys';
 import {CustomButton} from '../Buttons/Button';
+import memoizeOne from 'memoize-one';
 
 interface MapProps {
   handleLong: (longitude: number) => void;
@@ -24,10 +38,19 @@ interface MapState {
   searchQuery: string;
   open: boolean;
   bounceValue: Animated.Value;
+  address: {
+    localAddress: string;
+    city: string;
+    state: string;
+    pincode: string;
+  };
+  loading: boolean;
 }
 
-export class Map extends Component<MapProps, MapState> {
+export class Map extends PureComponent<MapProps, MapState> {
   inputRef: React.RefObject<any>;
+  keyboardDidShowListener!: EmitterSubscription;
+  keyboardDidHideListener!: EmitterSubscription;
   constructor(props: MapProps) {
     super(props);
     this.state = {
@@ -41,20 +64,38 @@ export class Map extends Component<MapProps, MapState> {
       searchQuery: '',
       open: false,
       bounceValue: new Animated.Value(300),
+      address: {
+        localAddress: '',
+        city: '',
+        state: '',
+        pincode: '',
+      },
+      loading: true,
     };
     this.inputRef = React.createRef();
+    this.keyboardDidShowListener?.bind!;
   }
-  onChangeSearch = (query: any) => {
-    this.setState({searchQuery: query});
-    const url = search_API;
-    fetch(`${url}${this.state.searchQuery.trim()}`)
-      .then(res => res.json())
-      .then(res => {
-        console.log(res.data[0]);
-      })
-      .catch(err => console.log(err));
-    console.log({query: this.state.searchQuery.trim()});
-  };
+
+  UNSAFE_componentWillMount() {
+    this.keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      (e: KeyboardEvent) => {
+        console.log({e});
+        // this.handleBounce();
+      },
+    );
+    this.keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      (e: KeyboardEvent) => {
+        console.log({e});
+      },
+    );
+  }
+
+  componentWillUnmount() {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
 
   handleBounce = () => {
     var toValue = 300;
@@ -79,8 +120,9 @@ export class Map extends Component<MapProps, MapState> {
     const {
       cordinate: {latitude, longitude, latitudeDelta, longitudeDelta},
       marginBottom,
-      searchQuery,
       open,
+      address: {state, city, localAddress, pincode},
+      loading,
     } = this.state!;
     return (
       <>
@@ -90,7 +132,7 @@ export class Map extends Component<MapProps, MapState> {
               position: 'absolute',
               zIndex: 10,
               left: 0,
-              height: 550,
+              height: 600,
               width: width,
               backgroundColor: 'rgba(0,0,0,0.6)',
               borderTopRightRadius: 10,
@@ -108,45 +150,66 @@ export class Map extends Component<MapProps, MapState> {
                 width: '100%',
                 flexDirection: 'row',
                 alignItems: 'center',
-                justifyContent: 'space-evenly',
+                justifyContent: 'space-around',
               }}>
-              <Text style={{fontSize: 25}}>Search location</Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'flex-start',
+                }}>
+                <IconButton icon="map-marker" />
+                <Text style={{fontSize: 20}}>Your current location</Text>
+              </View>
               <Animated.View
                 style={[{transform: [{rotate: open ? '180deg' : '0deg'}]}]}>
                 <IconButton icon="arrow-up-circle-outline" size={25} />
               </Animated.View>
             </View>
           </TouchableOpacity>
-          <View style={{width: '90%', left: 20}}>
-            <SearchBar
-              ref={this.inputRef}
-              onChangeText={this.onChangeSearch}
-              value={searchQuery}
-              onClearPress={() => {
-                this.inputRef?.current?.clear;
-                this.setState({searchQuery: ''});
-              }}
-              onFocus={() => this.handleBounce()}
-              spinnerVisibility={
-                this.state.searchQuery.length > 0 ? true : false
-              }
-              darkMode={true}
-            />
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                width: '100%',
-              }}>
-              <IconButton icon="map-marker" color={'red'} size={30} />
+          <ScrollView style={{width: '90%', left: 20}}>
+            {loading ? (
+              <ActivityIndicator size={'large'} />
+            ) : (
               <View>
-                <Text style={{fontSize: 21}}>Your current location</Text>
                 <TextInput
+                  label="Area"
                   editable={false}
-                  style={{height: 30, margin: 10, width: '100%'}}
+                  value={localAddress}
+                  style={{margin: 10, height: 70}}
+                  numberOfLines={2}
+                  multiline={true}
                 />
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                  }}>
+                  <TextInput
+                    label="City"
+                    editable={false}
+                    value={city}
+                    style={{margin: 10, height: 50, width: 160}}
+                  />
+                  <TextInput
+                    label="State"
+                    editable={false}
+                    value={state}
+                    style={{margin: 10, height: 50, width: 130}}
+                  />
+                </View>
+                <View>
+                  <TextInput
+                    label="Pincode"
+                    editable={false}
+                    value={pincode}
+                    style={{margin: 10, height: 50}}
+                  />
+                </View>
               </View>
-            </View>
+            )}
+
             <View
               style={{
                 alignItems: 'center',
@@ -165,7 +228,7 @@ export class Map extends Component<MapProps, MapState> {
                 onpress={() => console.log('hello')}
               />
             </View>
-          </View>
+          </ScrollView>
         </Animated.View>
         <MapView
           provider={PROVIDER_DEFAULT} // remove if not using Google Maps
@@ -190,7 +253,7 @@ export class Map extends Component<MapProps, MapState> {
                 longitudeDelta: e.longitudeDelta,
               },
             });
-
+            this.updateAddress();
             this.props.handleLat(this.state.cordinate.latitude);
             this.props.handleLong(this.state.cordinate.longitude);
           }}
@@ -208,4 +271,45 @@ export class Map extends Component<MapProps, MapState> {
       </>
     );
   }
+  updateAddress = () => {
+    const url = address_API;
+    this.setState({loading: true});
+    fetch(
+      `${url}${this.state.cordinate.latitude}%2C${this.state.cordinate.longitude}`,
+    )
+      .then(res => res.json())
+      .then(res => {
+        // console.log(res.data[2].formatted_address);
+        const tmp = res.data;
+
+        let longestAddress = tmp.reduce((a: any, b: any) => {
+          return a.formatted_address.length > b.formatted_address.length
+            ? a
+            : b;
+        });
+
+        let areaAddress =
+          longestAddress.address_components[0].long_name +
+          ', ' +
+          longestAddress.address_components[1].long_name +
+          ', ' +
+          longestAddress.address_components[2].long_name +
+          ', ' +
+          longestAddress.address_components[3].long_name +
+          ', ' +
+          longestAddress.address_components[4].long_name +
+          ', ' +
+          longestAddress.address_components[5].long_name;
+        // this.setState({address: {localAddress: areaAddress}});
+
+        let city = longestAddress.address_components[6].long_name;
+        let state = longestAddress.address_components[8].long_name;
+        let pincode = longestAddress.address_components[10].long_name;
+        this.setState({
+          address: {localAddress: areaAddress, city, pincode, state},
+        });
+        this.setState({loading: false});
+      })
+      .catch(err => console.log(err));
+  };
 }

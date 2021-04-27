@@ -2,7 +2,6 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import React, {Component} from 'react';
 import {Dimensions, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import {Appbar} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
 import {card} from '../helpers/snippets';
 import {CustomButton} from './components/Buttons/Button';
