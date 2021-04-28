@@ -173,14 +173,16 @@ export class Map extends PureComponent<MapProps, MapState> {
             ) : (
               <View>
                 <TextInput
-                  label="Area"
                   editable={false}
-                  value={localAddress}
-                  style={{margin: 10, height: 70}}
-                  numberOfLines={2}
-                  multiline={true}
+                  label={'Location'}
+                  value={`${localAddress} ${city} ${state} ${pincode}`}
+                  style={{
+                    margin: 10,
+                    height: 100,
+                  }}
+                  multiline
                 />
-                <View
+                {/* <View
                   style={{
                     flexDirection: 'row',
                     alignItems: 'center',
@@ -206,7 +208,7 @@ export class Map extends PureComponent<MapProps, MapState> {
                     value={pincode}
                     style={{margin: 10, height: 50}}
                   />
-                </View>
+                </View> */}
               </View>
             )}
 
@@ -302,9 +304,15 @@ export class Map extends PureComponent<MapProps, MapState> {
           longestAddress.address_components[5].long_name;
         // this.setState({address: {localAddress: areaAddress}});
 
-        let city = longestAddress.address_components[6].long_name;
-        let state = longestAddress.address_components[8].long_name;
-        let pincode = longestAddress.address_components[10].long_name;
+        let city = longestAddress?.address_components[6]?.long_name
+          ? longestAddress.address_components[6].long_name + ','
+          : '';
+        let state = longestAddress?.address_components[8]?.long_name
+          ? longestAddress.address_components[8].long_name + ','
+          : '';
+        let pincode = longestAddress?.address_components[10]?.long_name
+          ? longestAddress.address_components[10].long_name
+          : '';
         this.setState({
           address: {localAddress: areaAddress, city, pincode, state},
         });

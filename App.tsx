@@ -46,6 +46,7 @@ const CustomDarkTheme = {
     ...PaperDarkTheme.colors,
     background: '#333333',
     text: '#ffffff',
+    primary: 'rgba(255, 255, 255, 0.9)',
   },
 };
 const App = () => {

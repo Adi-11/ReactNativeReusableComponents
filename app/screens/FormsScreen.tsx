@@ -1,21 +1,31 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {Component, createRef} from 'react';
 import {Keyboard, ScrollView, StyleSheet, View} from 'react-native';
-import {Colors, Paragraph, TextInput} from 'react-native-paper';
+import {
+  Button,
+  Colors,
+  IconButton,
+  Paragraph,
+  TextInput,
+} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
 import {HeaderComponent} from './helperScreens/HeaderComponent';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {CustomButton} from './components/Buttons/Button';
 import Moment from 'moment';
+import StepIndicator from 'react-native-step-indicator';
+import {customStyles} from '../helpers/col';
 interface FormsScreenProps {
   navigation: StackNavigationProp<AppParamList, 'FromsComponent'>;
 }
+const labels = ['Presonal Details', 'Address', 'Education'];
 
 interface FormsScreenState {
   date: Date;
   mode: string;
   show: boolean;
   BottomView: boolean;
+  currposition: number;
 }
 
 export class FormsScreen extends Component<FormsScreenProps, FormsScreenState> {
@@ -28,6 +38,7 @@ export class FormsScreen extends Component<FormsScreenProps, FormsScreenState> {
       mode: 'date',
       show: false,
       BottomView: true,
+      currposition: 2,
     };
   }
 
@@ -49,7 +60,6 @@ export class FormsScreen extends Component<FormsScreenProps, FormsScreenState> {
     const currentDate = selectedDate || this.state.date;
     this.setState({show: !this.state.show});
     this.setState({date: currentDate});
-    console.log({date: this.state.date});
   };
 
   showMode = (currentMode: any) => {
@@ -66,7 +76,7 @@ export class FormsScreen extends Component<FormsScreenProps, FormsScreenState> {
   };
 
   render() {
-    const {date, mode, show, BottomView} = this.state;
+    const {date, mode, show, BottomView, currposition} = this.state;
     return (
       <View style={{flex: 1}}>
         <HeaderComponent
@@ -75,34 +85,131 @@ export class FormsScreen extends Component<FormsScreenProps, FormsScreenState> {
         />
 
         <ScrollView contentContainerStyle={{margin: 20}}>
-          <Paragraph style={{textAlign: 'center', fontSize: 20}}>
-            Personal Details
-          </Paragraph>
-          <TextInput
-            label="Name"
-            style={{marginBottom: 20, height: 50, marginTop: 10}}
+          <StepIndicator
+            customStyles={customStyles}
+            currentPosition={currposition}
+            stepCount={3}
+            labels={labels}
+            onPress={() => console.log('Hello')}
           />
-          <TextInput label="Email" style={{marginBottom: 20, height: 50}} />
-          <TextInput
-            label="Mobile Number"
-            style={{marginBottom: 20, height: 50}}
-          />
-          <TextInput
-            label="College Name"
-            style={{marginBottom: 20, height: 50}}
-          />
-          <Paragraph style={{textAlign: 'center', fontSize: 20}}>
-            Address
-          </Paragraph>
-          <TextInput
-            label="Street Address"
-            style={{marginBottom: 20, height: 50, marginTop: 10}}
-          />
-          <TextInput label="Landmark" style={{marginBottom: 20, height: 50}} />
-          <TextInput label="Landmark" style={{marginBottom: 20, height: 50}} />
-          <TextInput label="Landmark" style={{marginBottom: 20, height: 50}} />
-          <TextInput label="Landmark" style={{marginBottom: 20, height: 50}} />
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <IconButton
+              icon="arrow-left"
+              onPress={() => this.setState({currposition: currposition - 1})}
+              style={{position: 'relative', left: 0}}
+              disabled={currposition === 0 && true}
+            />
 
+            <IconButton
+              icon="arrow-right"
+              onPress={() => this.setState({currposition: currposition + 1})}
+              style={{position: 'relative', right: 0}}
+              disabled={currposition === 2 && true}
+            />
+          </View>
+          {currposition === 0 && (
+            <>
+              <TextInput
+                label="Name"
+                keyboardType={'default'}
+                style={{marginBottom: 20, height: 60, marginTop: 10}}
+              />
+              <TextInput
+                label="Email"
+                style={{marginBottom: 20, height: 60}}
+                keyboardType={'email-address'}
+              />
+              <TextInput
+                label="Mobile Number"
+                style={{marginBottom: 20, height: 60}}
+                keyboardType={'numeric'}
+              />
+              <TextInput
+                label="Date of birth"
+                style={{marginBottom: 20, height: 60}}
+                placeholder={'Select from calender'}
+                value={Moment(date).format('YYYY-MM-DD')}
+              />
+            </>
+          )}
+          {currposition === 1 && (
+            <>
+              <TextInput
+                label="Street Address"
+                style={{marginBottom: 20, height: 60, marginTop: 10}}
+              />
+              <TextInput
+                label="Landmark"
+                style={{marginBottom: 20, height: 60}}
+              />
+              <TextInput label="City" style={{marginBottom: 20, height: 60}} />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}>
+                <TextInput
+                  label="State"
+                  style={{marginBottom: 20, height: 60, width: 140}}
+                />
+                <TextInput
+                  label="Pincode"
+                  style={{marginBottom: 20, height: 60, width: 140}}
+                  keyboardType={'numeric'}
+                />
+              </View>
+              <TextInput
+                label="Country"
+                style={{marginBottom: 60, height: 60}}
+              />
+            </>
+          )}
+          {currposition === 2 && (
+            <>
+              <TextInput
+                label="College Name"
+                style={{marginBottom: 20, height: 60, marginTop: 10}}
+              />
+              <TextInput
+                label="College's City Name"
+                style={{marginBottom: 20, height: 60}}
+              />
+              <TextInput label="Year" style={{marginBottom: 20, height: 60}} />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}>
+                <TextInput
+                  label="Degree"
+                  style={{marginBottom: 20, height: 60, width: 140}}
+                />
+                <TextInput
+                  label="Specialization"
+                  style={{marginBottom: 20, height: 60, width: 140}}
+                  keyboardType={'numeric'}
+                />
+              </View>
+              <View style={{alignItems: 'center'}}>
+                <CustomButton
+                  borderRadius={10}
+                  color={'rgba(255,255,255,0.7)'}
+                  height={50}
+                  width={'80%'}
+                  margin={15}
+                  text={'submit'}
+                  onpress={() => console.log('Form submitted')}
+                  textSize={20}
+                />
+              </View>
+            </>
+          )}
           {show && (
             <DateTimePicker
               testID="dateTimePicker"
@@ -127,7 +234,7 @@ export class FormsScreen extends Component<FormsScreenProps, FormsScreenState> {
             </View>
             <View style={{position: 'absolute', right: 10, bottom: 25}}>
               <CustomButton
-                borderRadius={50}
+                borderRadius={10}
                 margin={10}
                 iconname="calendar"
                 iconcolor="black"
