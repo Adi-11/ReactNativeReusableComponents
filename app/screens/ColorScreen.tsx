@@ -1,5 +1,5 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import React, {Component} from 'react';
+import React, {Component, PureComponent} from 'react';
 import {ToastAndroid, View, FlatList} from 'react-native';
 import {Appbar} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
@@ -14,7 +14,10 @@ interface ColorScreenState {
   colors: any[];
 }
 
-export class ColorScreen extends Component<ColorScreenProps, ColorScreenState> {
+export class ColorScreen extends PureComponent<
+  ColorScreenProps,
+  ColorScreenState
+> {
   setColor: React.RefObject<any>;
 
   constructor(props: ColorScreenProps) {
