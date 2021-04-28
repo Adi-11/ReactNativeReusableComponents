@@ -1,7 +1,6 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {Component} from 'react';
 import {ImageSourcePropType, View} from 'react-native';
-import {Appbar} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
 import {button} from '../helpers/snippets';
 import {CustomButton} from './components/Buttons/Button';

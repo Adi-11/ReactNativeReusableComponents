@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react';
+import React, {PureComponent} from 'react';
 import {
   StyleSheet,
   View,
@@ -11,16 +11,14 @@ import {
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import MapView, {PROVIDER_DEFAULT, Region} from 'react-native-maps';
 const {width, height} = Dimensions.get('window');
-import SearchBar from 'react-native-dynamic-search-bar';
 import {
   ActivityIndicator,
   IconButton,
   Text,
   TextInput,
 } from 'react-native-paper';
-import {address_API, search_API} from '../../../helpers/keys';
+import {address_API} from '../../../helpers/keys';
 import {CustomButton} from '../Buttons/Button';
-import memoizeOne from 'memoize-one';
 
 interface MapProps {
   handleLong: (longitude: number) => void;
@@ -81,7 +79,6 @@ export class Map extends PureComponent<MapProps, MapState> {
       'keyboardDidShow',
       (e: KeyboardEvent) => {
         console.log({e});
-        // this.handleBounce();
       },
     );
     this.keyboardDidHideListener = Keyboard.addListener(
@@ -182,33 +179,6 @@ export class Map extends PureComponent<MapProps, MapState> {
                   }}
                   multiline
                 />
-                {/* <View
-                  style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                  }}>
-                  <TextInput
-                    label="City"
-                    editable={false}
-                    value={city}
-                    style={{margin: 10, height: 50, width: 160}}
-                  />
-                  <TextInput
-                    label="State"
-                    editable={false}
-                    value={state}
-                    style={{margin: 10, height: 50, width: 130}}
-                  />
-                </View>
-                <View>
-                  <TextInput
-                    label="Pincode"
-                    editable={false}
-                    value={pincode}
-                    style={{margin: 10, height: 50}}
-                  />
-                </View> */}
               </View>
             )}
 

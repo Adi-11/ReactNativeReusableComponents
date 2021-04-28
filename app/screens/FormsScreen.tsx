@@ -1,13 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
-import React, {Component, createRef} from 'react';
+import React, {Component} from 'react';
 import {Keyboard, ScrollView, StyleSheet, View} from 'react-native';
-import {
-  Button,
-  Colors,
-  IconButton,
-  Paragraph,
-  TextInput,
-} from 'react-native-paper';
+import {Colors, IconButton, TextInput} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
 import {HeaderComponent} from './helperScreens/HeaderComponent';
 import DateTimePicker from '@react-native-community/datetimepicker';

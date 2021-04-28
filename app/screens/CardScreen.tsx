@@ -1,6 +1,6 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {Component} from 'react';
-import {Dimensions, View} from 'react-native';
+import {View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {AppParamList} from '../helpers/AppParamList';
 import {card} from '../helpers/snippets';
@@ -8,7 +8,6 @@ import {CustomButton} from './components/Buttons/Button';
 import {CustomCards} from './components/cards/Cards';
 import {HeaderComponent} from './helperScreens/HeaderComponent';
 import {PopupViewComponent} from './helperScreens/PopupViewComponent';
-const {width, height} = Dimensions.get('window');
 interface CardScreenProps {
   navigation: StackNavigationProp<AppParamList, 'CardComponent'>;
 }

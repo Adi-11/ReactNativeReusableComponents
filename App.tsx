@@ -24,7 +24,7 @@ import {SvgScreen} from './app/screens/SvgScreen';
 import {FormsScreen} from './app/screens/FormsScreen';
 import {MapScreen} from './app/screens/MapScreen';
 import Geolocation from 'react-native-geolocation-service';
-import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
+import {PERMISSIONS, request} from 'react-native-permissions';
 
 const Stack = createStackNavigator<AppParamList>();
 const CustomDefaultTheme = {
@@ -91,7 +91,7 @@ const App = () => {
         if (isThemed === 'true') {
           setIsDarkTheme(true);
         } else {
-          setIsDarkTheme(false);
+          setIsDarkTheme(true);
         }
       }
     } catch (error) {

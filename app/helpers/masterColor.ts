@@ -1,4 +1,3 @@
-import uuid from 'react-native-uuid';
 export const COLORS = [
   {colorname: 'BtnColor', colorcode: '#4f75ab'},
   {colorname: 'aliceblue', colorcode: '#f0f8ff'},

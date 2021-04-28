@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Image, Text, View} from 'react-native';
 import {IMAGE_SIZE, SPACING} from '../../../helpers/constants';
 import {Dimensions} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 const {width, height} = Dimensions.get('window');
 interface CardsProps {
   cardHeight: number;

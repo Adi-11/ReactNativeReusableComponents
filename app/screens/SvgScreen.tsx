@@ -1,7 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect, useRef} from 'react';
 import {View, Animated, StyleSheet, TextInput} from 'react-native';
-import SVG, {G, Circle, Ellipse} from 'react-native-svg';
+import SVG, {G, Circle} from 'react-native-svg';
 import {AppParamList} from '../helpers/AppParamList';
 import {HeaderComponent} from './helperScreens/HeaderComponent';
 

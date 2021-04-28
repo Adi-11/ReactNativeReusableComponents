@@ -68,6 +68,11 @@ export class ColorScreen extends PureComponent<
             removeClippedSubviews={true}
             maxToRenderPerBatch={8}
             updateCellsBatchingPeriod={10}
+            getItemLayout={(date, index) => ({
+              length: 45,
+              offset: 45 * index,
+              index,
+            })}
           />
         </View>
       </View>
