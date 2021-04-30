@@ -4,6 +4,7 @@ import {StatusBar, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Appbar, Button} from 'react-native-paper';
 import {AppParamList} from '../helpers/AppParamList';
+import {string} from '../helpers/language/localization';
 import {BannerComponent} from './helperScreens/Banner';
 
 interface HomeScreenProps {
@@ -16,6 +17,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   });
 
   const _handleSearch = () => console.log('Searching to be implemented');
+  const handleLang = () => {
+    string.setLanguage('hi');
+  };
 
   return (
     <View style={{backgroundColor: '#0000', flex: 1}}>
@@ -70,6 +74,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           style={{width: '100%', borderWidth: 2, marginBottom: 20}}
           onPress={() => navigation.navigate('MapsComponent')}>
           Maps Component
+        </Button>
+
+        <Button
+          icon="svg"
+          mode="contained"
+          style={{width: '100%', borderWidth: 2, marginBottom: 20}}
+          onPress={() => handleLang()}>
+          {string.CHANGE}
         </Button>
       </ScrollView>
     </View>

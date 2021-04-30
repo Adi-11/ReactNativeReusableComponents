@@ -168,6 +168,7 @@ export class Map extends PureComponent<MapProps, MapState> {
             {loading ? (
               <ActivityIndicator size={'large'} />
             ) : (
+              /*<Loader />*/
               <View>
                 <TextInput
                   editable={false}
@@ -225,7 +226,7 @@ export class Map extends PureComponent<MapProps, MapState> {
                 longitudeDelta: e.longitudeDelta,
               },
             });
-            this.updateAddress();
+            // this.updateAddress();
             this.props.handleLat(this.state.cordinate.latitude);
             this.props.handleLong(this.state.cordinate.longitude);
           }}

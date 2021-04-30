@@ -25,6 +25,8 @@ import {FormsScreen} from './app/screens/FormsScreen';
 import {MapScreen} from './app/screens/MapScreen';
 import Geolocation from 'react-native-geolocation-service';
 import {PERMISSIONS, request} from 'react-native-permissions';
+import {Loader} from './app/screens/components/loader/Loader';
+import SplashScreen from 'react-native-splash-screen';
 
 const Stack = createStackNavigator<AppParamList>();
 const CustomDefaultTheme = {
@@ -77,6 +79,7 @@ const App = () => {
         );
       }
     })();
+    SplashScreen.hide();
   }, []);
   useEffect(() => {
     setLoading(true);
@@ -114,9 +117,9 @@ const App = () => {
 
   if (loading) {
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <ActivityIndicator theme={theme} animating={true} size={50} />
-      </View>
+      // <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Loader />
+      // </View>
     );
   }
 
